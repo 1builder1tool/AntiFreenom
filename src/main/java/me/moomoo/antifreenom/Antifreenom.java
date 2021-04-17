@@ -13,7 +13,7 @@ public final class Antifreenom extends Plugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        getProxy().getPluginManager().registerListener(this, this);
     }
 
     @Override
@@ -24,36 +24,30 @@ public final class Antifreenom extends Plugin implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPing(ProxyPingEvent evt) {
         if (evt.getConnection().getVirtualHost().getHostName().contains("1b1t.tk")) {
-            evt.getConnection().disconnect(new TextComponent(ChatColor.translateAlternateColorCodes(
+            evt.getResponse().setDescriptionComponent(new TextComponent(ChatColor.translateAlternateColorCodes(
                     '&',
-                    "\n" +
-                            "&7-------------------------------------------------------" +
-                            "\n\n" +
-                            "&6Please connect using&r&3 1b1t.me" +
-                            "\n" +
-                            "&6Conéctese usando&r&3 1b1t.me" +
-                            "\n\n" +
-                            "&7&m-------------------------------------------------------"
+                    "&6Please connect using &71b1t.me"
             )));
-            getLogger().info("Prevented " + evt.getConnection().getName() + " from connecting with 1b1t.me");
+            getLogger().info("Prevented " + evt.getConnection().getSocketAddress().toString() + " from pinging 1b1t.tk");
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onConnect(PreLoginEvent evt) {
         if (evt.getConnection().getVirtualHost().getHostName().contains("1b1t.tk")) {
-            evt.getConnection().disconnect(new TextComponent(ChatColor.translateAlternateColorCodes(
+            evt.setCancelReason(new TextComponent(ChatColor.translateAlternateColorCodes(
                     '&',
                     "\n" +
-                            "&7-------------------------------------------------------" +
+                            "&7&m-------------------------------------------------------" +
                             "\n\n" +
-                            "&6Please connect using&r&3 1b1t.me" +
+                            "&6Please connect using &71b1t.me" +
                             "\n" +
-                            "&6Conéctese usando&r&3 1b1t.me" +
+                            "&6Conéctese usando &71b1t.me" +
                             "\n\n" +
                             "&7&m-------------------------------------------------------"
             )));
-            getLogger().info("Prevented " + evt.getConnection().getName() + " from connecting with 1b1t.me");
+            evt.setCancelled(true);
+            getLogger().info("Prevented " + evt.getConnection().getName() + " from connecting with 1b1t.tk");
         }
     }
 }

@@ -9,9 +9,6 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.event.EventHandler;
 import net.md_5.bungee.event.EventPriority;
 
-import javax.xml.soap.Text;
-import java.awt.*;
-
 public final class Antifreenom extends Plugin implements Listener {
 
     @Override
@@ -25,8 +22,8 @@ public final class Antifreenom extends Plugin implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPing(ProxyPingEvent evt){
-        if(evt.getConnection().getVirtualHost().getHostName().contains("1b1t.tk")){
+    public void onPing(ProxyPingEvent evt) {
+        if (evt.getConnection().getVirtualHost().getHostName().contains("1b1t.tk")) {
             evt.getConnection().disconnect(new TextComponent(ChatColor.translateAlternateColorCodes(
                     '&',
                     "\n" +
@@ -43,8 +40,8 @@ public final class Antifreenom extends Plugin implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onConnect(PreLoginEvent evt){
-        if(evt.getConnection().getVirtualHost().getHostName().contains("1b1t.tk")){
+    public void onConnect(PreLoginEvent evt) {
+        if (evt.getConnection().getVirtualHost().getHostName().contains("1b1t.tk")) {
             evt.getConnection().disconnect(new TextComponent(ChatColor.translateAlternateColorCodes(
                     '&',
                     "\n" +
